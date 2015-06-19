@@ -6,20 +6,28 @@
 
 provision="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+set -e
 
 # Personal Telco Project source code.
-git clone git://github.com/personaltelco/ptp-cab.git
-git clone git://github.com/personaltelco/ptp-openwrt-files.git
-git clone git://github.com/personaltelco/ptp-splash-server.git
-git clone git://github.com/personaltelco/ptp-splash-page.git
-
+[ ! -d ptp-cab ] && git clone git://github.com/personaltelco/ptp-cab.git
+[ ! -d ptp-openwrt-files ] && \
+    git clone git://github.com/personaltelco/ptp-openwrt-files.git
+[ ! -d ptp-splash-server ] && \
+    git clone git://github.com/personaltelco/ptp-splash-server.git
+[ ! -d ptp-splash-page ] && \
+    git clone git://github.com/personaltelco/ptp-splash-page.git
 
 # cwnmyr, the community wireless network management platform.
-git clone git://github.com/keeganquinn/cwnmyr.git
+[ ! -d cwnmyr ] && git clone git://github.com/keeganquinn/cwnmyr.git
 
+cd cwnmyr
+bundle install
+rake db:migrate
+
+cd ..
 
 # OpenWrt buildroot.
-git clone git://git.openwrt.org/openwrt.git
+[ ! -d openwrt ] && git clone git://git.openwrt.org/openwrt.git
 
 cd openwrt
 scripts/feeds update
