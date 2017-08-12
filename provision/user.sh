@@ -17,15 +17,6 @@ set -e
 [ ! -d ptp-splash-page ] && \
     git clone git://github.com/personaltelco/ptp-splash-page.git
 
-# cwnmyr, the community wireless network management platform.
-[ ! -d cwnmyr ] && git clone git://github.com/keeganquinn/cwnmyr.git
-
-cd cwnmyr
-bundle install
-rake db:migrate
-
-cd ..
-
 # OpenWrt buildroot.
 [ ! -d openwrt ] && git clone git://git.openwrt.org/openwrt.git
 
